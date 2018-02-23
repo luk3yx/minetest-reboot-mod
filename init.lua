@@ -28,7 +28,7 @@ local checkReboot
 checkReboot = function()
     if reboot and next(minetest.get_connected_players()) == nil then
         -- Time to reboot
-        if irc then irc:say("The server is empty! Rebooting...")
+        if irc then irc:say("The server is empty! Rebooting...") end
         minetest.request_shutdown("Rebooting...", true, 0)
     end
 end
