@@ -40,8 +40,24 @@ minetest.register_chatcommand("reboot", {
     params = "",
     description = "Reboots the server next time it is empty.",
     func = function()
+        if reboot then
+            return false, "There is already a reboot pending!"
+        end
         reboot = true
         checkReboot()
         return true, "Reboot scheduled!"
+    end
+})
+
+minetest.register_chatcommand("cancelreboot", {
+    privs = {server = true},
+    params = "",
+    description = "Cancels a pending reboot.",
+    func = function()
+        if not reboot then
+            return false, "There is no reboot to cancel!"
+        end
+        reboot = false
+        return true, "Reboot aborted!"
     end
 })
